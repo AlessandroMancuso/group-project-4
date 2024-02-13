@@ -3,6 +3,14 @@ const gameContainer = document.getElementById("gameContainer");
 const ambience = document.getElementById("ambience");
 const player = document.getElementById("player");
 
+let obstacleTimer;
+let playerRunInterval;
+
+let gameOver = false;
+
+//SCORE
+let score = 0;
+
 const clouds = [
   { name: "big-cloud", width: 150 },
   { name: "medium-cloud", width: 110 },
@@ -46,22 +54,34 @@ function handleEnvironment() {
 
 // Obstacles
 const createObstacle = () => {
-  const obstacle = document.createElement("div");
-  obstacle.classList.add("obstacle");
-  gameContainer.appendChild(obstacle);
 
-  let obstaclePosition = 50;
-  obstacle.style.left = obstaclePosition + "vw";
+  if(!gameOver){
+    const obstacle = document.createElement("div");
+    obstacle.classList.add("obstacle");
+    gameContainer.appendChild(obstacle);
 
-  let obstacleTimer = setInterval(() => {
-    if (obstaclePosition < -50) {
-      clearInterval(obstacleTimer);
-      obstacle.remove();
-    }
-
-    obstaclePosition -= 0.5;
+    let obstaclePosition = 50;
     obstacle.style.left = obstaclePosition + "vw";
-  }, 10);
+
+    obstacleTimer = setInterval(() => {
+      if (obstaclePosition < -50) {
+        clearInterval(obstacleTimer);
+        obstacle.remove();
+      }
+
+      if (obstaclePosition > 14 && obstaclePosition < 16 && player.classList.contains('jump')) {
+        score++;
+        console.log(score);
+      } else if (obstaclePosition > 14 && obstaclePosition < 16 && !player.classList.contains('jump')) {
+        handleGameOver();
+        // return;
+      }
+
+      obstaclePosition -= 0.5;
+      obstacle.style.left = obstaclePosition + "vw";
+    }, 10);
+  }
+  
 };
 
 const startObstacles = () => {
@@ -73,8 +93,7 @@ const startObstacles = () => {
 const playerRun = () => {
   let i = 0;
 
-  const intervalId = setInterval(() => {
-
+  playerRunInterval = setInterval(() => {
     // Check if it's time to reset
     if (i == 9) {
       // Remove the current class
@@ -93,9 +112,8 @@ const playerRun = () => {
     if (i > 1) {
       player.classList.remove(`run${i - 1}`);
     }
-
-    
   }, 50);
+
 };
 
 const jump = () => {
@@ -117,7 +135,14 @@ document.addEventListener("keydown", (event) => {
 const game = () => {
   playerRun();
   handleEnvironment();
-  // startObstacles();
+  startObstacles();
 };
+
+const handleGameOver = () => {
+  console.log(`GAME OVER\nSCORE: ${score}`);
+  clearInterval(obstacleTimer);  
+  clearInterval(playerRunInterval);
+  gameOver = true;
+}
 
 game();

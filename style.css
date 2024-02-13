@@ -31,9 +31,9 @@
   background-size: contain;
   background-repeat: no-repeat;
   bottom: 3vh;
-  left: 10vh;
-  width: 11vh;
-  height: 7vh;
+  left: 10vw;
+  width: 8vw;
+  height: 5vw;
 }
 
 .run1 {
@@ -118,6 +118,17 @@
     background-repeat: no-repeat;    
     bottom: 3vh;
     right: -8vh;
-    width: 8vh;
-    height: 6vh;
+    width: 5vw;
+    height: 5vh;
+    /* background-color: blueviolet; */
+}
+
+.obstacle-placeholder {
+    /* position: absolute;
+    left: 13vw;
+    bottom: 2vh;
+    width: 1vw;
+
+    height: 10vh;
+    background-color: aqua; */
 }
