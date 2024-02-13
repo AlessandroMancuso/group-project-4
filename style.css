@@ -1,1 +1,123 @@
 /* STYLES */
+
+#gameContainer {
+    position: relative;
+    width: 50vw;
+    height: 30vh;
+    background-color: aliceblue;
+    margin: 100px auto;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+#ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%; 
+    height: 3vh;
+    background-color: darkolivegreen;
+}
+
+#ambience {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    /* display: flex;
+    gap: 3em */
+}
+
+#player {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  bottom: 3vh;
+  left: 10vh;
+  width: 11vh;
+  height: 7vh;
+}
+
+.run1 {
+    background-image: url('./canvas/dog1.png');
+}
+
+.run2 {
+    background-image: url('./canvas/dog2.png');
+}
+
+.run3 {
+    background-image: url('./canvas/dog3.png');
+}
+
+.run4 {
+    background-image: url('./canvas/dog4.png');
+}
+
+.run5 {
+    background-image: url('./canvas/dog5.png');
+}
+
+.run6 {
+    background-image: url('./canvas/dog6.png');
+}
+
+.run7 {
+    background-image: url('./canvas/dog7.png');
+}
+
+.run8 {
+    background-image: url('./canvas/dog8.png');
+}
+
+.run9 {
+    background-image: url('./canvas/dog9.png');
+}
+  
+#player.jump {
+  animation: jumpAnimation 0.3s ease;
+}
+
+@keyframes jumpAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10vh);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.cloud {
+    position: absolute;
+    background-image: url('./canvas/cloud.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.big-cloud {
+    right: -150px;
+    width: 150px;
+    height: 150px;
+}
+
+.small-cloud {
+    width: 70px;
+    height: 70px;
+}
+
+.medium-cloud {
+    width: 110px;
+    height: 110px;
+}
+
+.obstacle {
+    position: absolute;
+    background-image: url('./canvas/rock.png');
+    background-size: contain;
+    background-repeat: no-repeat;    
+    bottom: 3vh;
+    right: -8vh;
+    width: 8vh;
+    height: 6vh;
+}
