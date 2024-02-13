@@ -1,1 +1,27 @@
 /* STYLES */
+body {
+    margin: 0;
+}
+h1 {
+    text-align: center;
+}
+.game {
+    background-color: chocolate;
+    padding: 2vw 2vh;
+    /*margin: 5vw 3vh;*/
+    width: 100vw;
+    height: 100vh;
+}
+
+.instructions {
+    display: none;
+    position: fixed;
+    z-index: 9;
+    bottom: 0;
+    right: 15px;
+    width: 80vh;
+    height: 50vh;
+    padding: 2vw 2vh;
+    margin: 5vw 3vh;
+    background-color: aqua;
+}
