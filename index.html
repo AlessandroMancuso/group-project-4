@@ -4,36 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Group Project 4 - The Jump Game</title>
-    <link rel="stylesheet" href="./style.css" class="rel">
-</head>
-<body>
+    <link rel="stylesheet" href="./style.css" class="rel" />
+  </head>
+  <body>
     <main>
-      <section class="game">
-        <p>canvas for Jump Game</p>
-      </section>
-      <section class="instructions" id="gameInstructions">
-        <h1>Instructions</h1>
-        <hr>
-        <p>Welcome to the Jumping game</p>
-        <ul id="instruction"> 
-        </ul>
-        <button id="startGameButton">OK</button>
-      </section>
-    </main>
 
-    <div id="gameContainer">
+      <section id="gameContainer">
 
-        <div id="ambience">
-            
-        </div>
+        <section class="instructions" id="gameInstructions">
+          <h1>Welcome to the Jumping game</h1>
+          <hr />
+          <p>Instructions</p>
+          <ul id="instruction"></ul>
+          <button id="startGameButton">OK</button>
+        </section>
+
+        <div id="ambience"></div>
 
         <div id="player"></div>
-        <!-- <div id="obstacle"></div> -->
-        <div class="obstacle-placeholder"></div>
+        <div class="collision-area"></div>
         <div id="ground"></div>
+      </section>
+      
+    </main>
 
-    </div>
-    
     <script src="./script.js"></script>
   </body>
 </html>
