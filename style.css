@@ -136,21 +136,21 @@ h1 {
 
 .obstacle {
   position: absolute;
-  background-image: url("./canvas/rock.png");
+  /* background-image: url("./canvas/rock.png"); */
   bottom: 3vh;
   right: -8vh;
 }
 .rock {
   content: url("./images/rock_moss.png");
-  height: 5vh;
+  height: 5vw;
 }
 .tree {
   content: url("./images/tree_pine1.png");
-  height: 7vh;
+  height: 7vw;
 }
 .flower {
   content: url("./images/flower_blue.png");
-  height: 3vh;
+  height: 3vw;
 }
 
 .collision-area {
@@ -158,7 +158,6 @@ h1 {
   left: 12vw;
   bottom: 3vh;
   width: 5vw;
-
   height: 10vh;
   border: 1px solid aqua;
 }
