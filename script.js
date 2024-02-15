@@ -83,14 +83,22 @@ function handleEnvironment() {
   setTimeout(handleEnvironment, Math.random() * 3000);
 }
 
-// OBSTACLES AND GAME LOGIC
+
+// OSTACLES AND GAME LOGIC
+const obstacles = ["rock", "tree", "flower"];
 
 let obstacleTimer;
 
+const getRandomObstacle = () => {
+  const randomIndex = Math.floor(Math.random() * obstacles.length);
+  return obstacles[randomIndex];
+};
+
 const createObstacle = () => {
   if (!gameOver) {
-    const obstacle = document.createElement("div");
-    obstacle.classList.add("obstacle");
+    const obstacle = document.createElement("img");
+    const obstacleDetail = getRandomObstacle();
+    obstacle.classList.add("obstacle", obstacleDetail);
     gameContainer.appendChild(obstacle);
 
     let obstaclePosition = 50;
