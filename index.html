@@ -3,14 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Group Project 4 - The Jump Game</title>
+    <title>The Jumping Game</title>
     <link rel="stylesheet" href="./style.css" class="rel" />
   </head>
   <body>
     <main>
 
       <section id="gameContainer">
-
         <section class="instructions" id="gameInstructions">
           <h1>Welcome to the Jumping game</h1>
           <hr />
@@ -19,18 +18,16 @@
           <button id="startGameButton">OK</button>
         </section>
 
-        <div id="ambience"></div>
-
-        <div id="player"></div>
-        <div class="collision-area"></div>
-        <div id="ground"></div>
-        <h2 id="score">000</h2>
+        <section id="game">
+          <section id="ambience"></section>
+          <h2 id="score">000</h2>
+          <img id="player"></img>
+          <!-- <div class="collision-area"></div> -->
+          <div id="ground"></div>
+        </section>
       </section>
-
-        
-      
+     
     </main>
-
     <script src="./script.js"></script>
   </body>
 </html>

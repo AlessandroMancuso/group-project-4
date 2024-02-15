@@ -148,19 +148,12 @@ const playerRun = () => {
 
   playerRunInterval = setInterval(() => {
     if (i == 9) {
-      // Remove the current run class
       player.classList.remove(`run${i}`);
-      // Reset to 'run1'
       i = 1;
     } else {
-      // Increment i for the next class
       i++;
     }
-
-    // Add the run class for current index
     player.classList.add(`run${i}`);
-
-    // Remove the run class for previous index
     if (i > 1) {
       player.classList.remove(`run${i - 1}`);
     }
@@ -200,7 +193,7 @@ document.addEventListener("keydown", jumpKey);
 const game = () => {
   playerRun();
   handleEnvironment();
-  startObstacles();
+  setTimeout(startObstacles, 4000);
 };
 
 const handleGameOver = () => {

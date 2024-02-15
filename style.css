@@ -7,22 +7,6 @@ h1 {
   text-align: center;
 }
 
-.game {
-  background-color: chocolate;
-  padding: 2vw 2vh;
-  /*margin: 5vw 3vh;*/
-  width: 100vw;
-  height: 100vh;
-}
-
-.instructions {
-  display: none;
-  position: absolute;
-  height: 100%;
-  z-index: 9;
-  background-color: aqua;
-}
-
 #gameContainer {
   position: relative;
   width: 50vw;
@@ -45,8 +29,6 @@ h1 {
   position: absolute;
   top: 0;
   width: 100%;
-  /* display: flex;
-    gap: 3em */
 }
 
 #player {
@@ -59,62 +41,50 @@ h1 {
   height: 5vw;
 }
 
+.instructions {
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 9;
+  background-color: aqua;
+}
+
 .run1 {
-  background-image: url("./canvas/dog1.png");
+  content: url("./canvas/dog1.png");
 }
 
 .run2 {
-  background-image: url("./canvas/dog2.png");
+  content: url("./canvas/dog2.png");
 }
 
 .run3 {
-  background-image: url("./canvas/dog3.png");
+  content: url("./canvas/dog3.png");
 }
 
 .run4 {
-  background-image: url("./canvas/dog4.png");
+  content: url("./canvas/dog4.png");
 }
 
 .run5 {
-  background-image: url("./canvas/dog5.png");
+  content: url("./canvas/dog5.png");
 }
 
 .run6 {
-  background-image: url("./canvas/dog6.png");
+  content: url("./canvas/dog6.png");
 }
 
 .run7 {
-  background-image: url("./canvas/dog7.png");
+  content: url("./canvas/dog7.png");
 }
 
 .run8 {
-  background-image: url("./canvas/dog8.png");
+  content: url("./canvas/dog8.png");
 }
 
 .run9 {
-  background-image: url("./canvas/dog9.png");
+  content: url("./canvas/dog9.png");
 }
-
-@keyframes jumpAnimation {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12vh);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes fallAnimation {
-    0% {
-      transform: translateY(-12vh);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
 
 #player.jump-up {
   transform: translateY(-12vh);
@@ -151,21 +121,21 @@ h1 {
 
 .obstacle {
   position: absolute;
-  /* background-image: url("./canvas/rock.png"); */
+  height: 5vw;
   bottom: 3vh;
   right: -8vh;
 }
+
 .rock {
   content: url("./images/rock_moss.png");
-  height: 5vw;
 }
+
 .tree {
   content: url("./images/tree_pine1.png");
-  height: 5vw;
 }
+
 .flower {
   content: url("./images/flower_blue.png");
-  height: 3vw;
 }
 
 .collision-area {
@@ -174,8 +144,8 @@ h1 {
   bottom: 3vh;
   width: 5vw;
   height: 10vh;
-  /* border: 1px solid aqua; */
 }
+
 #score {
   position: absolute;
   top: 0px;
