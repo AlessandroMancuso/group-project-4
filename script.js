@@ -170,10 +170,12 @@ const playerRun = () => {
 // Player jump
 
 const jump = () => {
-  player.classList.add("jump");
-  setTimeout(() => {
-    player.classList.remove("jump");
-  }, 300);
+  if (!gameOver) {
+    player.classList.add("jump");
+    setTimeout(() => {
+      player.classList.remove("jump");
+    }, 300);
+  }
 };
 
 const jumpKey = (event) => {
