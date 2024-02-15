@@ -72,8 +72,10 @@ function createCloud() {
       newCloud.remove();
     }
 
-    cloudPosition -= 0.1;
-    newCloud.style.left = cloudPosition + "vw";
+    if (!gameOver) {
+      cloudPosition -= 0.1;
+      newCloud.style.left = cloudPosition + "vw";
+    }
   }, 10);
 }
 
