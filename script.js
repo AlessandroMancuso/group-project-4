@@ -1,15 +1,45 @@
-// SCRIPT
+// CONSTANTS
+
+// Instructions section
+const buttonStart = document.getElementById("startGameButton");
+const gameInstructions = document.getElementById("gameInstructions");
+const instruction = document.getElementById("instruction");
+const rules = [
+  "1. To win you have to avoid all the obstacles: stones and rabbits",
+  "2. If you collide with any of the obstacles you will automatically lose and lose your score.",
+  "3. To jump press the 'up', 'enter' or 'space' key",
+  "4. Good luck and have fun with Jumping game",
+];
+
+// Game section
 const gameContainer = document.getElementById("gameContainer");
 const ambience = document.getElementById("ambience");
 const player = document.getElementById("player");
 
-let obstacleTimer;
-let playerRunInterval;
+//SCORE
+let score = 0;
 
 let gameOver = false;
 
-//SCORE
-let score = 0;
+// INSTRUCTIONS MANAGEMENT
+
+function addInstructions() {
+  for (let i = 0; i < 4; i++) {
+    const instruction1 = document.createElement("p");
+    instruction1.textContent = rules[i];
+    instruction.appendChild(instruction1);
+  }
+}
+
+function openInstructions() {
+  gameInstructions.style.display = "block";
+}
+
+function closeInstructions() {
+  gameInstructions.style.display = "none";
+}
+
+// AMBIENCE
 
 const clouds = [
   { name: "big-cloud", width: 150 },
@@ -22,7 +52,7 @@ const getRandomCloud = () => {
   return clouds[randomIndex];
 };
 
-// Function to create a new obstacle
+// Function to create and move a new cloud
 function createCloud() {
   const newCloud = document.createElement("div");
   const cloudDetail = getRandomCloud();
@@ -52,10 +82,12 @@ function handleEnvironment() {
   setTimeout(handleEnvironment, Math.random() * 3000);
 }
 
-// Obstacles
-const createObstacle = () => {
+// OSTACLES AND GAME LOGIC
 
-  if(!gameOver){
+let obstacleTimer;
+
+const createObstacle = () => {
+  if (!gameOver) {
     const obstacle = document.createElement("div");
     obstacle.classList.add("obstacle");
     gameContainer.appendChild(obstacle);
@@ -69,19 +101,25 @@ const createObstacle = () => {
         obstacle.remove();
       }
 
-      if (obstaclePosition > 14 && obstaclePosition < 16 && player.classList.contains('jump')) {
+      if (
+        obstaclePosition > 13 &&
+        obstaclePosition < 17 &&
+        player.classList.contains("jump")
+      ) {
         score++;
         console.log(score);
-      } else if (obstaclePosition > 14 && obstaclePosition < 16 && !player.classList.contains('jump')) {
+      } else if (
+        obstaclePosition > 13 &&
+        obstaclePosition < 17 &&
+        !player.classList.contains("jump")
+      ) {
         handleGameOver();
-        // return;
       }
 
       obstaclePosition -= 0.5;
       obstacle.style.left = obstaclePosition + "vw";
     }, 10);
   }
-  
 };
 
 const startObstacles = () => {
@@ -89,14 +127,16 @@ const startObstacles = () => {
   setTimeout(startObstacles, Math.random() * 4000 + 2000);
 };
 
-// Player
+// PLAYER
+
+let playerRunInterval;
+
 const playerRun = () => {
   let i = 0;
 
   playerRunInterval = setInterval(() => {
-    // Check if it's time to reset
     if (i == 9) {
-      // Remove the current class
+      // Remove the current run class
       player.classList.remove(`run${i}`);
       // Reset to 'run1'
       i = 1;
@@ -105,16 +145,17 @@ const playerRun = () => {
       i++;
     }
 
-    // Add the class for current index
+    // Add the run class for current index
     player.classList.add(`run${i}`);
 
-    // Remove the class for previous index
+    // Remove the run class for previous index
     if (i > 1) {
       player.classList.remove(`run${i - 1}`);
     }
   }, 50);
-
 };
+
+// Player jump
 
 const jump = () => {
   player.classList.add("jump");
@@ -123,12 +164,18 @@ const jump = () => {
   }, 300);
 };
 
-// Event listener for spacebar to jump
-document.addEventListener("keydown", (event) => {
-  if (event.code === "Space") {
-    jump();
+const jumpKey = (event) => {
+  switch (event.keyCode) {
+    case 13:
+    case 32:
+    case 38:
+    case 87:
+      jump();
+      break;
   }
-});
+};
+
+document.addEventListener("keydown", jumpKey);
 
 // GAME
 
@@ -140,9 +187,15 @@ const game = () => {
 
 const handleGameOver = () => {
   console.log(`GAME OVER\nSCORE: ${score}`);
-  clearInterval(obstacleTimer);  
+  clearInterval(obstacleTimer);
   clearInterval(playerRunInterval);
   gameOver = true;
-}
+};
 
-game();
+addInstructions();
+openInstructions();
+
+buttonStart.addEventListener("click", function (e) {
+  closeInstructions();
+  game();
+});

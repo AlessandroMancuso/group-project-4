@@ -1,9 +1,32 @@
 /* STYLES */
+body {
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+.game {
+    background-color: chocolate;
+    padding: 2vw 2vh;
+    /*margin: 5vw 3vh;*/
+    width: 100vw;
+    height: 100vh;
+}
+
+.instructions {
+    display: none;
+    position: absolute;
+    height: 100%;
+    z-index: 9;
+    background-color: aqua;
+}
 
 #gameContainer {
     position: relative;
     width: 50vw;
-    height: 30vh;
+    height: 35vh;
     background-color: aliceblue;
     margin: 100px auto;
     border: 1px solid #ccc;
@@ -123,12 +146,12 @@
     /* background-color: blueviolet; */
 }
 
-.obstacle-placeholder {
-    /* position: absolute;
-    left: 13vw;
-    bottom: 2vh;
-    width: 1vw;
+.collision-area {
+    position: absolute;
+    left: 12vw;
+    bottom: 3vh;
+    width: 5vw;
 
     height: 10vh;
-    background-color: aqua; */
+    border: 1px solid aqua;
 }
