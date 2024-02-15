@@ -146,7 +146,7 @@ h1 {
 }
 .tree {
   content: url("./images/tree_pine1.png");
-  height: 7vw;
+  height: 5vw;
 }
 .flower {
   content: url("./images/flower_blue.png");
@@ -161,9 +161,8 @@ h1 {
   height: 10vh;
   border: 1px solid aqua;
 }
-#score{
-    position: absolute;
-    top:0px;
-    right:15px;
+#score {
+  position: absolute;
+  top: 0px;
+  right: 15px;
 }
-
