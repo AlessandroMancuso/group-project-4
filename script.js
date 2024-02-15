@@ -105,7 +105,7 @@ const createObstacle = () => {
       if (
         obstaclePosition > 13 &&
         obstaclePosition < 17 &&
-        player.classList.contains("jump")
+        player.classList.contains("jump-up")
       ) {
         score++;
         scoreDisplay.innerText = score.toString().padStart(3, "0");
@@ -113,7 +113,7 @@ const createObstacle = () => {
       } else if (
         obstaclePosition > 13 &&
         obstaclePosition < 17 &&
-        !player.classList.contains("jump")
+        !player.classList.contains("jump-up")
       ) {
         handleGameOver();
       }
@@ -160,9 +160,13 @@ const playerRun = () => {
 // Player jump
 
 const jump = () => {
-  player.classList.add("jump");
+  player.classList.add("jump-up");
   setTimeout(() => {
-    player.classList.remove("jump");
+    player.classList.remove("jump-up");
+    player.classList.add("jump-down");
+    setTimeout(() => {
+      player.classList.remove("jump-down");
+    }, 300);
   }, 300);
 };
 

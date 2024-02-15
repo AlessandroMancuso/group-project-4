@@ -95,10 +95,6 @@ h1 {
   background-image: url("./canvas/dog9.png");
 }
 
-#player.jump {
-  animation: jumpAnimation 0.6s ease;
-}
-
 @keyframes jumpAnimation {
   0% {
     transform: translateY(0);
@@ -109,6 +105,25 @@ h1 {
   100% {
     transform: translateY(0);
   }
+}
+
+@keyframes fallAnimation {
+    0% {
+      transform: translateY(-12vh);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+#player.jump-up {
+  transform: translateY(-12vh);
+  transition: transform 0.3s ease;
+}
+  
+#player.jump-down {
+  transform: translateY(0);
+  transition: transform 0.3s ease;
 }
 
 .cloud {
@@ -153,7 +168,7 @@ h1 {
   width: 5vw;
 
   height: 10vh;
-  border: 1px solid aqua;
+  /* border: 1px solid aqua; */
 }
 
 #score{
