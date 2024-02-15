@@ -72,8 +72,10 @@ function createCloud() {
       newCloud.remove();
     }
 
-    cloudPosition -= 0.1;
-    newCloud.style.left = cloudPosition + "vw";
+    if (!gameOver) {
+      cloudPosition -= 0.1;
+      newCloud.style.left = cloudPosition + "vw";
+    }
   }, 10);
 }
 
@@ -83,14 +85,22 @@ function handleEnvironment() {
   setTimeout(handleEnvironment, Math.random() * 3000);
 }
 
-// OBSTACLES AND GAME LOGIC
+
+// OSTACLES AND GAME LOGIC
+const obstacles = ["rock", "tree", "flower"];
 
 let obstacleTimer;
 
+const getRandomObstacle = () => {
+  const randomIndex = Math.floor(Math.random() * obstacles.length);
+  return obstacles[randomIndex];
+};
+
 const createObstacle = () => {
   if (!gameOver) {
-    const obstacle = document.createElement("div");
-    obstacle.classList.add("obstacle");
+    const obstacle = document.createElement("img");
+    const obstacleDetail = getRandomObstacle();
+    obstacle.classList.add("obstacle", obstacleDetail);
     gameContainer.appendChild(obstacle);
 
     let obstaclePosition = 50;
@@ -160,14 +170,16 @@ const playerRun = () => {
 // Player jump
 
 const jump = () => {
-  player.classList.add("jump-up");
-  setTimeout(() => {
-    player.classList.remove("jump-up");
-    player.classList.add("jump-down");
+  if (!gameOver) {
+    player.classList.add("jump-up");
     setTimeout(() => {
-      player.classList.remove("jump-down");
+      player.classList.remove("jump-up");
+      player.classList.add("jump-down");
+      setTimeout(() => {
+        player.classList.remove("jump-down");
+      }, 300);
     }, 300);
-  }, 300);
+  }
 };
 
 const jumpKey = (event) => {
