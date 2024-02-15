@@ -72,8 +72,10 @@ function createCloud() {
       newCloud.remove();
     }
 
-    cloudPosition -= 0.1;
-    newCloud.style.left = cloudPosition + "vw";
+    if (!gameOver) {
+      cloudPosition -= 0.1;
+      newCloud.style.left = cloudPosition + "vw";
+    }
   }, 10);
 }
 
@@ -168,10 +170,12 @@ const playerRun = () => {
 // Player jump
 
 const jump = () => {
-  player.classList.add("jump");
-  setTimeout(() => {
-    player.classList.remove("jump");
-  }, 300);
+  if (!gameOver) {
+    player.classList.add("jump");
+    setTimeout(() => {
+      player.classList.remove("jump");
+    }, 300);
+  }
 };
 
 const jumpKey = (event) => {
