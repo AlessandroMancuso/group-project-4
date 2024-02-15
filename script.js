@@ -18,6 +18,7 @@ const player = document.getElementById("player");
 
 //SCORE
 let score = 0;
+let scoreDisplay = document.getElementById("score");
 
 let gameOver = false;
 
@@ -82,8 +83,10 @@ function handleEnvironment() {
   setTimeout(handleEnvironment, Math.random() * 3000);
 }
 
+
 // OSTACLES AND GAME LOGIC
 const obstacles = ["rock", "tree", "flower"];
+
 let obstacleTimer;
 
 const getRandomObstacle = () => {
@@ -113,6 +116,7 @@ const createObstacle = () => {
         player.classList.contains("jump")
       ) {
         score++;
+        scoreDisplay.innerText = score.toString().padStart(3, "0");
         console.log(score);
       } else if (
         obstaclePosition > 13 &&
