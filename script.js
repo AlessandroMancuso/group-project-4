@@ -41,6 +41,11 @@ function closeInstructions() {
 
 // AMBIENCE
 
+let backgroundMusic = new Audio('./sounds/music.mp3');
+backgroundMusic.loop = true;
+
+const playAudio = () => backgroundMusic.play();
+
 const clouds = [
   { name: "big-cloud", width: 150 },
   { name: "medium-cloud", width: 110 },
@@ -78,6 +83,7 @@ function createCloud() {
 
 // Function to start generating clouds
 function handleEnvironment() {
+  playAudio();
   createCloud();
   setTimeout(handleEnvironment, Math.random() * 3000);
 }
@@ -157,7 +163,10 @@ const playerRun = () => {
 
 // Player jump
 
+const barkEffect = new Audio("./sounds/dog-bark.wav");
+
 const jump = () => {
+  barkEffect.play();
   player.classList.add("jump");
   setTimeout(() => {
     player.classList.remove("jump");
