@@ -20,17 +20,24 @@
           <section id="ambience"></section>
           <section class="game-over-container hidden">
             <div class="game-over-display">
-              <h1>GAME OVER</h1>
-              <button id="restart_btn">Restart</button>
+              <h1 id="message"></h1>
+              <p id="final-score" class="hidden" ></p>
+
+              <section class="message-buttons">
+                <button id="quit_btn">Quit</button>
+                <button id="restart_btn">Restart</button>
+              </section>
+
             </div>
           </section>
           
           <h2 id="score">000</h2>
           <img id="player"></img>
-          <!-- <div class="collision-area"></div> -->
+
           <div id="ground">
-            <button id="quit">Quit</button>
+            <button id="quit_game">Quit</button>
           </div>
+
         </section>
       </section>
     </main>

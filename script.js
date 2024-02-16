@@ -6,6 +6,8 @@ const gameInstructions = document.getElementById("gameInstructions");
 const instruction = document.getElementById("instruction");
 const buttonPlayAgain = document.getElementById("playAgain");
 const buttonDontPlayAgain = document.getElementById("dontPlayAgain");
+const message = document.getElementById("message");
+const finalScore = document.getElementById("final-score");
 const finalMessage = document.getElementById("goodbyeMessage");
 const rules = [
   "1. To win you have to avoid all the obstacles: stones, trees and rabbits",
@@ -254,22 +256,41 @@ document.addEventListener("keydown", jumpKey);
 // Game Over display && restart function
 const gameOverContainer = document.querySelector(".game-over-container");
 const restartBtn = document.getElementById("restart_btn");
+const quitBtn = document.getElementById("quit_btn");
+const quitGame = document.getElementById("quit_game");
 
-const gameRestart = () => {
+const clearGame = () => {
   resetScore();
-
   clearObstacles();
   clearClouds();
-
   hiddenGameOver();
-
   gameOver = false;
+}
 
+const gameRestart = () => {
+  clearGame();
   game();
 };
 
+const gameQuit = () => {
+  clearGame();
+  openInstructions();
+};
+
+const showGamePause = () => {
+  stopGame();
+  gameOverContainer.classList.remove("hidden");
+  message.innerText = "GAME PAUSE";
+  quitBtn.addEventListener("click", gameQuit);
+  restartBtn.addEventListener("click", gameRestart);
+}
+
 const showGameOver = () => {
   gameOverContainer.classList.remove("hidden");
+  message.innerText = "GAME OVER";
+  finalScore.classList.remove("hidden");
+  finalScore.innerText = `Final Score: ${score}`;
+  quitBtn.addEventListener("click", gameQuit);
   restartBtn.addEventListener("click", gameRestart);
 };
 
@@ -277,7 +298,25 @@ const hiddenGameOver = () => {
   gameOverContainer.classList.add("hidden");
 }
 
+document.addEventListener('keydown', function(event) {
+  if (event.key === "Escape" || event.key === "Esc") {
+    showGamePause();
+  }
+});
+
+quitGame.addEventListener("click", gameQuit);
+
 // GAME
+const stopGame = () => {
+  // Clear timers
+  clearInterval(cloudTimer);
+  clearInterval(obstacleTimer);
+  clearInterval(playerRunInterval);
+
+  // Clear existing timeouts
+  clearTimeout(obstacleTimeout);
+  clearTimeout(cloudTimeOut);
+}
 
 const game = () => {
   playAudio();
@@ -287,18 +326,7 @@ const game = () => {
 };
 
 const handleGameOver = () => {
-  console.log(`GAME OVER\nSCORE: ${score}`);
-
-  // Clear timers
-  clearInterval(cloudTimer);
-  clearInterval(obstacleTimer);
-  clearInterval(playerRunInterval);
-
-  // Clear existing timeouts
-  clearTimeout(obstacleTimeout);
-  clearTimeout(cloudTimeOut);
-
-  backgroundMusic.pause();
+  stopGame();
 
   gameOver = true;
   showGameOver();

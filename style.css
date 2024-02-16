@@ -187,7 +187,7 @@ h2 {
   position: relative;
   width: 100%;
   height: 100%;
-  padding-top: 50px;
+  padding-top: 10vh;
   z-index: 5;
   display: flex;
   flex-direction: column;
@@ -196,13 +196,21 @@ h2 {
 }
 .game-over-display h1 {
   font-size: 2rem;
+  margin-bottom: 0;
   font-weight: bolder;
   font-family: "Orbitron", sans-serif;
 }
-#restart_btn {
+
+.message-buttons{
+  display: flex;
+  gap: 1em;
+}
+
+.message-buttons button {
   font-family: "Orbitron", sans-serif;
   font-weight: bolder;
 }
+
 .hidden {
   display: none;
 }
