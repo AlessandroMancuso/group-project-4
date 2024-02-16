@@ -6,14 +6,14 @@ body {
   font-family: "Roboto Mono", monospace;
 }
 
-h1 {
+h1, h2 {
   text-align: center;
 }
 
 #gameContainer {
   position: relative;
   width: 50vw;
-  height: 35vh;
+  height: 40vh;
   background-color: aliceblue;
   margin: 100px auto;
   border: 1px solid #ccc;
@@ -44,15 +44,39 @@ h1 {
   height: 5vw;
 }
 
-.instructions {
+#gameInstructions {
+  position: fixed;
+  height: 320px;
+  width: 500px;
+  border: 1px solid black;
+  border-radius: 25px;
   display: none;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  z-index: 100;
+  padding: 10px;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
   background-color: aqua;
 }
 
+#goodbyeMessage {
+  position: fixed;
+  height: 300px;
+  width: 400px;
+  border: 1px solid black;
+  border-radius: 25px;
+  display: none;
+  padding: 10px;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+  background-color: burlywood;
+}
 .run1 {
   content: url("./canvas/dog1.png");
 }

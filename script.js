@@ -4,8 +4,11 @@
 const buttonStart = document.getElementById("startGameButton");
 const gameInstructions = document.getElementById("gameInstructions");
 const instruction = document.getElementById("instruction");
+const buttonPlayAgain = document.getElementById("playAgain");
+const buttonDontPlayAgain = document.getElementById("dontPlayAgain");
+const finalMessage = document.getElementById("goodbyeMessage");
 const rules = [
-  "1. To win you have to avoid all the obstacles: stones and rabbits",
+  "1. To win you have to avoid all the obstacles: stones, trees and rabbits",
   "2. If you collide with any of the obstacles you will automatically lose and lose your score.",
   "3. To jump press the 'up', 'enter' or 'space' key",
   "4. Good luck and have fun with Jumping game",
@@ -21,6 +24,7 @@ let score = 0;
 let scoreDisplay = document.getElementById("score");
 
 let gameOver = false;
+//let playAgain = false;
 
 // INSTRUCTIONS MANAGEMENT
 
@@ -39,6 +43,15 @@ function openInstructions() {
 function closeInstructions() {
   gameInstructions.style.display = "none";
 }
+
+/*function openFinalMessage() {
+  if (gameOver)
+    finalMessage.style.display = "block";
+}
+
+function closeFinalMessage() {
+  finalMessage.style.display = "none";
+}*/
 
 // AMBIENCE
 
@@ -183,7 +196,6 @@ const playerRun = () => {
 };
 
 // Player jump
-
 const jump = () => {
   if (!gameOver) {
     player.classList.add("jump-up");
@@ -225,10 +237,23 @@ const handleGameOver = () => {
   gameOver = true;
 };
 
-addInstructions();
-openInstructions();
-
 buttonStart.addEventListener("click", function (e) {
   closeInstructions();
   game();
 });
+
+/*buttonPlayAgain.addEventListener("click", function(e) {
+  playAgain = !playAgain;
+  closeFinalMessage();
+  if (playAgain)
+    game();
+})*/
+
+/*buttonDontPlayAgain.addEventListener("click", function(e) {
+  playAgain = false;
+})*/
+
+addInstructions();
+openInstructions();
+//openFinalMessage();
+
