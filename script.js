@@ -86,7 +86,6 @@ function createCloud() {
 
 // Function to start generating clouds
 function handleEnvironment() {
-  playAudio();
   createCloud();
   setTimeout(handleEnvironment, Math.random() * 3000);
 }
@@ -200,6 +199,7 @@ document.addEventListener("keydown", jumpKey);
 // GAME
 
 const game = () => {
+  playAudio();
   playerRun();
   handleEnvironment();
   setTimeout(startObstacles, 4000);
