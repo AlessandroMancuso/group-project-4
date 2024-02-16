@@ -22,12 +22,9 @@ const player = document.getElementById("player");
 //SCORE
 let score = 0;
 let scoreDisplay = document.getElementById("score");
-
-let gameOver = false;
-//let playAgain = false;
+let gameOver = true;
 
 // INSTRUCTIONS MANAGEMENT
-
 function addInstructions() {
   for (let i = 0; i < 4; i++) {
     const instruction1 = document.createElement("p");
@@ -44,18 +41,8 @@ function closeInstructions() {
   gameInstructions.style.display = "none";
 }
 
-/*function openFinalMessage() {
-  if (gameOver)
-    finalMessage.style.display = "block";
-}
-
-function closeFinalMessage() {
-  finalMessage.style.display = "none";
-}*/
-
 // AMBIENCE
-
-let backgroundMusic = new Audio('./sounds/music.mp3');
+let backgroundMusic = new Audio("./sounds/music.mp3");
 backgroundMusic.loop = true;
 
 const playAudio = () => backgroundMusic.play();
@@ -103,16 +90,6 @@ function handleEnvironment() {
   setTimeout(handleEnvironment, Math.random() * 3000);
 }
 
-// OSTACLES AND GAME LOGIC
-const obstacles = ["rock", "tree", "flower"];
-
-let obstacleTimer;
-
-const getRandomObstacle = () => {
-  const randomIndex = Math.floor(Math.random() * obstacles.length);
-  return obstacles[randomIndex];
-};
-
 const debounce = (func, wait, immediate) => {
   let timeout;
   return function () {
@@ -138,9 +115,20 @@ const increaseScore = () => {
 
 const scorePlus = debounce(increaseScore, 1000, true);
 
+// OSTACLES AND GAME LOGIC
+const obstacles = ["rock", "tree", "flower"];
+
+let obstacleTimer;
+
+const getRandomObstacle = () => {
+  const randomIndex = Math.floor(Math.random() * obstacles.length);
+  return obstacles[randomIndex];
+};
+
+let obstacle;
 const createObstacle = () => {
   if (!gameOver) {
-    const obstacle = document.createElement("img");
+    obstacle = document.createElement("img");
     const obstacleDetail = getRandomObstacle();
     obstacle.classList.add("obstacle", obstacleDetail);
     gameContainer.appendChild(obstacle);
@@ -231,6 +219,23 @@ const jumpKey = (event) => {
 
 document.addEventListener("keydown", jumpKey);
 
+// Game Over display && restart function
+const gameOverContainer = document.querySelector(".game-over-container");
+const restartBtn = document.getElementById("restart_btn");
+
+const gameRestart = () => {
+  score = 0;
+  gameOverContainer.classList.add("hidden");
+  obstacle.remove();
+  gameOver = false;
+  game();
+};
+
+const showGameOver = () => {
+  gameOverContainer.classList.remove("hidden");
+  restartBtn.addEventListener("click", gameRestart);
+};
+
 // GAME
 
 const game = () => {
@@ -246,25 +251,14 @@ const handleGameOver = () => {
   clearInterval(playerRunInterval);
   backgroundMusic.pause();
   gameOver = true;
+  showGameOver();
 };
 
 buttonStart.addEventListener("click", function (e) {
   closeInstructions();
+  gameOver = false;
   game();
 });
 
-/*buttonPlayAgain.addEventListener("click", function(e) {
-  playAgain = !playAgain;
-  closeFinalMessage();
-  if (playAgain)
-    game();
-})*/
-
-/*buttonDontPlayAgain.addEventListener("click", function(e) {
-  playAgain = false;
-})*/
-
 addInstructions();
 openInstructions();
-//openFinalMessage();
-
