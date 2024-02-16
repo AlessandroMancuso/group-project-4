@@ -24,7 +24,6 @@ let score = 0;
 let scoreDisplay = document.getElementById("score");
 
 let gameOver = false;
-//let playAgain = false;
 
 // INSTRUCTIONS MANAGEMENT
 
@@ -43,15 +42,6 @@ function openInstructions() {
 function closeInstructions() {
   gameInstructions.style.display = "none";
 }
-
-/*function openFinalMessage() {
-  if (gameOver)
-    finalMessage.style.display = "block";
-}
-
-function closeFinalMessage() {
-  finalMessage.style.display = "none";
-}*/
 
 // AMBIENCE
 
@@ -253,18 +243,6 @@ buttonStart.addEventListener("click", function (e) {
   game();
 });
 
-/*buttonPlayAgain.addEventListener("click", function(e) {
-  playAgain = !playAgain;
-  closeFinalMessage();
-  if (playAgain)
-    game();
-})*/
-
-/*buttonDontPlayAgain.addEventListener("click", function(e) {
-  playAgain = false;
-})*/
-
 addInstructions();
 openInstructions();
-//openFinalMessage();
 
