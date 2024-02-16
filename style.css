@@ -1,53 +1,34 @@
 /* STYLES */
 body {
-    margin: 0;
+  margin: 0;
 }
 
 h1 {
-    text-align: center;
-}
-
-.game {
-    background-color: chocolate;
-    padding: 2vw 2vh;
-    /*margin: 5vw 3vh;*/
-    width: 100vw;
-    height: 100vh;
-}
-
-.instructions {
-    display: none;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    z-index: 9;
-    background-color: aqua;
+  text-align: center;
 }
 
 #gameContainer {
-    position: relative;
-    width: 50vw;
-    height: 35vh;
-    background-color: aliceblue;
-    margin: 100px auto;
-    border: 1px solid #ccc;
-    overflow: hidden;
+  position: relative;
+  width: 50vw;
+  height: 35vh;
+  background-color: aliceblue;
+  margin: 100px auto;
+  border: 1px solid #ccc;
+  overflow: hidden;
 }
 
 #ground {
-    position: absolute;
-    bottom: 0;
-    width: 100%; 
-    height: 3vh;
-    background-color: darkolivegreen;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3vh;
+  background-color: darkolivegreen;
 }
 
 #ambience {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    /* display: flex;
-    gap: 3em */
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 #player {
@@ -60,99 +41,113 @@ h1 {
   height: 5vw;
 }
 
+.instructions {
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 9;
+  background-color: aqua;
+}
+
 .run1 {
-    background-image: url('./canvas/dog1.png');
+  content: url("./canvas/dog1.png");
 }
 
 .run2 {
-    background-image: url('./canvas/dog2.png');
+  content: url("./canvas/dog2.png");
 }
 
 .run3 {
-    background-image: url('./canvas/dog3.png');
+  content: url("./canvas/dog3.png");
 }
 
 .run4 {
-    background-image: url('./canvas/dog4.png');
+  content: url("./canvas/dog4.png");
 }
 
 .run5 {
-    background-image: url('./canvas/dog5.png');
+  content: url("./canvas/dog5.png");
 }
 
 .run6 {
-    background-image: url('./canvas/dog6.png');
+  content: url("./canvas/dog6.png");
 }
 
 .run7 {
-    background-image: url('./canvas/dog7.png');
+  content: url("./canvas/dog7.png");
 }
 
 .run8 {
-    background-image: url('./canvas/dog8.png');
+  content: url("./canvas/dog8.png");
 }
 
 .run9 {
-    background-image: url('./canvas/dog9.png');
-}
-  
-#player.jump {
-  animation: jumpAnimation 0.3s ease;
+  content: url("./canvas/dog9.png");
 }
 
-@keyframes jumpAnimation {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10vh);
-    }
-    100% {
-        transform: translateY(0);
-    }
+#player.jump-up {
+  transform: translateY(-12vh);
+  transition: transform 0.3s ease;
+}
+  
+#player.jump-down {
+  transform: translateY(0);
+  transition: transform 0.3s ease;
 }
 
 .cloud {
-    position: absolute;
-    background-image: url('./canvas/cloud.png');
-    background-size: contain;
-    background-repeat: no-repeat;
+  position: absolute;
+  background-image: url("./canvas/cloud.png");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .big-cloud {
-    right: -150px;
-    width: 150px;
-    height: 150px;
+  right: -150px;
+  width: 150px;
+  height: 150px;
 }
 
 .small-cloud {
-    width: 70px;
-    height: 70px;
+  width: 70px;
+  height: 70px;
 }
 
 .medium-cloud {
-    width: 110px;
-    height: 110px;
+  width: 110px;
+  height: 110px;
 }
 
 .obstacle {
-    position: absolute;
-    background-image: url('./canvas/rock.png');
-    background-size: contain;
-    background-repeat: no-repeat;    
-    bottom: 3vh;
-    right: -8vh;
-    width: 5vw;
-    height: 5vh;
-    /* background-color: blueviolet; */
+  position: absolute;
+  height: 5vw;
+  bottom: 3vh;
+  right: -8vh;
+}
+
+.rock {
+  content: url("./images/rock_moss.png");
+}
+
+.tree {
+  content: url("./images/tree_pine1.png");
+}
+
+.flower {
+  content: url("./images/flower_blue.png");
 }
 
 .collision-area {
-    position: absolute;
-    left: 12vw;
-    bottom: 3vh;
-    width: 5vw;
+  position: absolute;
+  left: 12vw;
+  bottom: 3vh;
+  width: 5vw;
+  height: 10vh;
+}
 
-    height: 10vh;
-    border: 1px solid aqua;
+#score {
+  position: absolute;
+  top: 0px;
+  right: 15px;
 }

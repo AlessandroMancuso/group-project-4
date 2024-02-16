@@ -18,6 +18,7 @@ const player = document.getElementById("player");
 
 //SCORE
 let score = 0;
+let scoreDisplay = document.getElementById("score");
 
 let gameOver = false;
 
@@ -76,8 +77,10 @@ function createCloud() {
       newCloud.remove();
     }
 
-    cloudPosition -= 0.1;
-    newCloud.style.left = cloudPosition + "vw";
+    if (!gameOver) {
+      cloudPosition -= 0.1;
+      newCloud.style.left = cloudPosition + "vw";
+    }
   }, 10);
 }
 
@@ -88,14 +91,22 @@ function handleEnvironment() {
   setTimeout(handleEnvironment, Math.random() * 3000);
 }
 
+
 // OSTACLES AND GAME LOGIC
+const obstacles = ["rock", "tree", "flower"];
 
 let obstacleTimer;
 
+const getRandomObstacle = () => {
+  const randomIndex = Math.floor(Math.random() * obstacles.length);
+  return obstacles[randomIndex];
+};
+
 const createObstacle = () => {
   if (!gameOver) {
-    const obstacle = document.createElement("div");
-    obstacle.classList.add("obstacle");
+    const obstacle = document.createElement("img");
+    const obstacleDetail = getRandomObstacle();
+    obstacle.classList.add("obstacle", obstacleDetail);
     gameContainer.appendChild(obstacle);
 
     let obstaclePosition = 50;
@@ -110,14 +121,15 @@ const createObstacle = () => {
       if (
         obstaclePosition > 13 &&
         obstaclePosition < 17 &&
-        player.classList.contains("jump")
+        player.classList.contains("jump-up")
       ) {
         score++;
+        scoreDisplay.innerText = score.toString().padStart(3, "0");
         console.log(score);
       } else if (
         obstaclePosition > 13 &&
         obstaclePosition < 17 &&
-        !player.classList.contains("jump")
+        !player.classList.contains("jump-up")
       ) {
         handleGameOver();
       }
@@ -142,19 +154,12 @@ const playerRun = () => {
 
   playerRunInterval = setInterval(() => {
     if (i == 9) {
-      // Remove the current run class
       player.classList.remove(`run${i}`);
-      // Reset to 'run1'
       i = 1;
     } else {
-      // Increment i for the next class
       i++;
     }
-
-    // Add the run class for current index
     player.classList.add(`run${i}`);
-
-    // Remove the run class for previous index
     if (i > 1) {
       player.classList.remove(`run${i - 1}`);
     }
@@ -166,11 +171,17 @@ const playerRun = () => {
 const barkEffect = new Audio("./sounds/dog-bark.wav");
 
 const jump = () => {
-  barkEffect.play();
-  player.classList.add("jump");
-  setTimeout(() => {
-    player.classList.remove("jump");
-  }, 300);
+  if (!gameOver) {
+    barkEffect.play();
+    player.classList.add("jump-up");
+    setTimeout(() => {
+      player.classList.remove("jump-up");
+      player.classList.add("jump-down");
+      setTimeout(() => {
+        player.classList.remove("jump-down");
+      }, 300);
+    }, 300);
+  }
 };
 
 const jumpKey = (event) => {
@@ -191,13 +202,14 @@ document.addEventListener("keydown", jumpKey);
 const game = () => {
   playerRun();
   handleEnvironment();
-  startObstacles();
+  setTimeout(startObstacles, 4000);
 };
 
 const handleGameOver = () => {
   console.log(`GAME OVER\nSCORE: ${score}`);
   clearInterval(obstacleTimer);
   clearInterval(playerRunInterval);
+  backgroundMusic.pause();
   gameOver = true;
 };
 
