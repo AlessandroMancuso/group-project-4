@@ -307,7 +307,7 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-quitGame.addEventListener("click", gameQuit);
+quitGame.addEventListener("click", showGamePause);
 
 // GAME
 const stopGame = () => {
