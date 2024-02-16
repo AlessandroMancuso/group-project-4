@@ -22,7 +22,7 @@ const player = document.getElementById("player");
 //SCORE
 let score = 0;
 let scoreDisplay = document.getElementById("score");
-let gameOver = true;
+let gameOver = false;
 
 // INSTRUCTIONS MANAGEMENT
 function addInstructions() {
@@ -256,7 +256,6 @@ const handleGameOver = () => {
 
 buttonStart.addEventListener("click", function (e) {
   closeInstructions();
-  gameOver = false;
   game();
 });
 
