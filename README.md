@@ -6,7 +6,9 @@ This is a simple jumping game made with HTML, CSS and Javascript where the playe
 
 # Description
 Help Tom the Dog to jump over all obstacles by pressing your 'space' button on the keyboard.
+
 You can easily quit or restart the game by pressing the 'esc' button on your keyboard.
+
 How many points will you get? Good luck!
 
 # Preview 
