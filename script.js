@@ -146,11 +146,11 @@ const getRandomObstacle = () => {
   return obstacles[randomIndex];
 };
 
-let obstacle;
+let obstacle = document.createElement("img");
 const createObstacle = () => {
   if (!gameOver) {
-    obstacle = document.createElement("img");
-    const obstacleDetail = getRandomObstacle();
+    // obstacle = document.createElement("img");
+    let obstacleDetail = getRandomObstacle();
     obstacle.classList.add("obstacle", obstacleDetail);
     gameContainer.appendChild(obstacle);
 
