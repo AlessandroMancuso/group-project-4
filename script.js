@@ -134,9 +134,12 @@ const increaseScore = () => {
 
 const scorePlus = debounce(increaseScore, 1000, true);
 
-const resetScore = () => score = 0;
+const resetScore = () => {
+  score = 0;
+  scoreDisplay.innerText = score.toString().padStart(3, "0");
+}
 
-// OSTACLES AND GAME LOGIC
+// OBSTACLES AND GAME LOGIC
 const obstacles = ["rock", "tree", "flower"];
 
 let obstacleTimer;
