@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+
 /* STYLES */
 body {
   margin: 0;
+  font-family: "Roboto Mono", monospace;
 }
 
 h1, h2 {
@@ -114,7 +117,7 @@ h1, h2 {
   transform: translateY(-12vh);
   transition: transform 0.3s ease;
 }
-  
+
 #player.jump-down {
   transform: translateY(0);
   transition: transform 0.3s ease;
@@ -174,4 +177,27 @@ h1, h2 {
   position: absolute;
   top: 0px;
   right: 15px;
+}
+
+.game-over-display {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.game-over-display h1 {
+  font-size: 2rem;
+  font-weight: bolder;
+  font-family: "Orbitron", sans-serif;
+}
+#restart_btn {
+  font-family: "Orbitron", sans-serif;
+  font-weight: bolder;
+}
+.hidden {
+  display: none;
 }
