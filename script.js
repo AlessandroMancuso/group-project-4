@@ -55,6 +55,11 @@ function closeFinalMessage() {
 
 // AMBIENCE
 
+let backgroundMusic = new Audio('./sounds/music.mp3');
+backgroundMusic.loop = true;
+
+const playAudio = () => backgroundMusic.play();
+
 const clouds = [
   { name: "big-cloud", width: 150 },
   { name: "medium-cloud", width: 110 },
@@ -196,8 +201,12 @@ const playerRun = () => {
 };
 
 // Player jump
+
+const barkEffect = new Audio("./sounds/dog-bark.wav");
+
 const jump = () => {
   if (!gameOver) {
+    barkEffect.play();
     player.classList.add("jump-up");
     setTimeout(() => {
       player.classList.remove("jump-up");
@@ -225,6 +234,7 @@ document.addEventListener("keydown", jumpKey);
 // GAME
 
 const game = () => {
+  playAudio();
   playerRun();
   handleEnvironment();
   setTimeout(startObstacles, 4000);
@@ -234,6 +244,7 @@ const handleGameOver = () => {
   console.log(`GAME OVER\nSCORE: ${score}`);
   clearInterval(obstacleTimer);
   clearInterval(playerRunInterval);
+  backgroundMusic.pause();
   gameOver = true;
 };
 
