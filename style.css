@@ -47,10 +47,10 @@ h2 {
 
 #gameInstructions {
   position: fixed;
-  height: 320px;
-  width: 500px;
+  height: 60vh;
+  width: 60vw;
   border: 1px solid black;
-  border-radius: 25px;
+  border-radius: 5px;
   display: none;
   padding: 10px;
   margin: auto;
@@ -60,6 +60,9 @@ h2 {
   left: 0;
   z-index: 9;
   background-color: aqua;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
 }
 
 #goodbyeMessage {
@@ -203,3 +206,12 @@ h2 {
 .hidden {
   display: none;
 }
+
+@media(max-width: 850px) {
+  #gameInstructions {
+    width: 80vw;
+    height: 80vh;
+  }
+
+}
+
