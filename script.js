@@ -85,7 +85,6 @@ function handleEnvironment() {
   setTimeout(handleEnvironment, Math.random() * 3000);
 }
 
-
 // OSTACLES AND GAME LOGIC
 const obstacles = ["rock", "tree", "flower"];
 
@@ -95,6 +94,31 @@ const getRandomObstacle = () => {
   const randomIndex = Math.floor(Math.random() * obstacles.length);
   return obstacles[randomIndex];
 };
+
+const debounce = (func, wait, immediate) => {
+  let timeout;
+  return function () {
+    let context = this;
+    let args = arguments;
+    const callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      timeout = null;
+      if (!immediate) {
+        func.apply(context, args);
+      }
+    }, wait);
+    if (callNow) func.apply(context, args);
+  };
+};
+
+const increaseScore = () => {
+  score++;
+  scoreDisplay.innerText = score.toString().padStart(3, "0");
+  console.log(score);
+};
+
+const scorePlus = debounce(increaseScore, 1000, true);
 
 const createObstacle = () => {
   if (!gameOver) {
@@ -117,9 +141,7 @@ const createObstacle = () => {
         obstaclePosition < 17 &&
         player.classList.contains("jump-up")
       ) {
-        score++;
-        scoreDisplay.innerText = score.toString().padStart(3, "0");
-        console.log(score);
+        scorePlus();
       } else if (
         obstaclePosition > 13 &&
         obstaclePosition < 17 &&
