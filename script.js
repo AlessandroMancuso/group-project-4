@@ -59,36 +59,55 @@ const getRandomCloud = () => {
 };
 
 // Function to create and move a new cloud
+
+let cloudTimer;
+
 function createCloud() {
-  const newCloud = document.createElement("div");
-  const cloudDetail = getRandomCloud();
-  const cloudStyle = cloudDetail.name;
-  const cloudWidth = cloudDetail.width;
+  if(!gameOver){
+    const newCloud = document.createElement("div");
+    const cloudDetail = getRandomCloud();
+    const cloudStyle = cloudDetail.name;
+    const cloudWidth = cloudDetail.width;
 
-  newCloud.classList.add("cloud", cloudStyle);
-  ambience.appendChild(newCloud);
+    newCloud.classList.add("cloud", cloudStyle);
+    ambience.appendChild(newCloud);
 
-  let cloudPosition = 50;
-  newCloud.style.left = cloudPosition + "vw";
+    let cloudPosition = 50;
+    newCloud.style.left = cloudPosition + "vw";
 
-  let cloudTimer = setInterval(() => {
-    if (cloudPosition < -cloudWidth) {
-      clearInterval(cloudTimer);
-      newCloud.remove();
-    }
+    cloudTimer = setInterval(() => {
+      if (cloudPosition < -cloudWidth) {
+        clearInterval(cloudTimer);
+        newCloud.remove();
+      }
 
-    if (!gameOver) {
-      cloudPosition -= 0.1;
-      newCloud.style.left = cloudPosition + "vw";
-    }
-  }, 10);
+      if (!gameOver) {
+        cloudPosition -= 0.1;
+        newCloud.style.left = cloudPosition + "vw";
+      }
+    }, 10);
+  }
 }
 
 // Function to start generating clouds
+let cloudTimeOut;
+
 function handleEnvironment() {
-  createCloud();
-  setTimeout(handleEnvironment, Math.random() * 3000);
+  if (!gameOver) {
+    createCloud();
+    cloudTimeOut = setTimeout(handleEnvironment, Math.random() * 3000);
+  }
 }
+
+const clearClouds = () => {
+  const cloudElements = document.querySelectorAll('.cloud');
+
+  cloudElements.forEach(function(cloudElement) {
+    cloudElement.remove();
+  });
+}
+
+// SCORE
 
 const debounce = (func, wait, immediate) => {
   let timeout;
@@ -114,6 +133,8 @@ const increaseScore = () => {
 };
 
 const scorePlus = debounce(increaseScore, 1000, true);
+
+const resetScore = () => score = 0;
 
 // OSTACLES AND GAME LOGIC
 const obstacles = ["rock", "tree", "flower"];
@@ -162,13 +183,24 @@ const createObstacle = () => {
   }
 };
 
+let obstacleTimeout;
+
 const startObstacles = () => {
-  createObstacle();
-  setTimeout(startObstacles, Math.random() * 4000 + 2000);
+  if (!gameOver) {
+    createObstacle();
+    obstacleTimeout = setTimeout(startObstacles, Math.random() * 4000 + 2000);
+  }
 };
 
-// PLAYER
+const clearObstacles = () => {
+  const obstacleElements = document.querySelectorAll('.obstacle');
 
+  obstacleElements.forEach(function(obstacleElement) {
+    obstacleElement.remove();
+  });
+}
+
+// PLAYER
 let playerRunInterval;
 
 const playerRun = () => {
@@ -224,10 +256,15 @@ const gameOverContainer = document.querySelector(".game-over-container");
 const restartBtn = document.getElementById("restart_btn");
 
 const gameRestart = () => {
-  score = 0;
-  gameOverContainer.classList.add("hidden");
-  obstacle.remove();
+  resetScore();
+
+  clearObstacles();
+  clearClouds();
+
+  hiddenGameOver();
+
   gameOver = false;
+
   game();
 };
 
@@ -235,6 +272,10 @@ const showGameOver = () => {
   gameOverContainer.classList.remove("hidden");
   restartBtn.addEventListener("click", gameRestart);
 };
+
+const hiddenGameOver = () => {
+  gameOverContainer.classList.add("hidden");
+}
 
 // GAME
 
@@ -247,9 +288,18 @@ const game = () => {
 
 const handleGameOver = () => {
   console.log(`GAME OVER\nSCORE: ${score}`);
+
+  // Clear timers
+  clearInterval(cloudTimer);
   clearInterval(obstacleTimer);
   clearInterval(playerRunInterval);
+
+  // Clear existing timeouts
+  clearTimeout(obstacleTimeout);
+  clearTimeout(cloudTimeOut);
+
   backgroundMusic.pause();
+
   gameOver = true;
   showGameOver();
 };
