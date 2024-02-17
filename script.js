@@ -48,9 +48,9 @@ const playAudio = () => backgroundMusic.play();
 const stopAudio = () => backgroundMusic.pause();
 
 const clouds = [
-  { name: "big-cloud", width: 150 },
-  { name: "medium-cloud", width: 110 },
-  { name: "small-cloud", width: 70 },
+  { name: "big-cloud", width: 15 },
+  { name: "medium-cloud", width: 10 },
+  { name: "small-cloud", width: 7 },
 ];
 
 const getRandomCloud = () => {
@@ -63,11 +63,14 @@ const getRandomCloud = () => {
 let cloudTimer;
 
 function createCloud() {
+
   if(!gameOver){
     const newCloud = document.createElement("div");
+
     const cloudDetail = getRandomCloud();
     const cloudStyle = cloudDetail.name;
     const cloudWidth = cloudDetail.width;
+    console.log(cloudWidth);
 
     newCloud.classList.add("cloud", cloudStyle);
     ambience.appendChild(newCloud);
@@ -76,17 +79,17 @@ function createCloud() {
     newCloud.style.left = cloudPosition + "vw";
 
     cloudTimer = setInterval(() => {
-      if (cloudPosition < -cloudWidth) {
-        clearInterval(cloudTimer);
-        newCloud.remove();
-      }
-
       if (!gameOver) {
         cloudPosition -= 0.1;
         newCloud.style.left = cloudPosition + "vw";
       }
+
+      if (cloudPosition < -cloudWidth) {
+        newCloud.remove();
+      }
     }, 10);
   }
+
 }
 
 // Function to start generating clouds
