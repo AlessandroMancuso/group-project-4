@@ -284,6 +284,7 @@ const showGamePause = () => {
   gameOverContainer.classList.remove("hidden");
   message.innerText = "GAME PAUSE";
   quitBtn.addEventListener("click", gameQuit);
+  finalScore.classList.add("hidden");
   restartBtn.classList.add("hidden");
   cancelBtn.classList.remove("hidden");
   //restartBtn.addEventListener("click", gameRestart);
@@ -300,6 +301,8 @@ const showGameOver = () => {
   finalScore.classList.remove("hidden");
   finalScore.innerText = `Final Score: ${score}`;
   quitBtn.addEventListener("click", gameQuit);
+  restartBtn.classList.remove("hidden");
+  cancelBtn.classList.add("hidden");
   restartBtn.addEventListener("click", gameRestart);
 };
 
