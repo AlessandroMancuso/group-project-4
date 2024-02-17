@@ -245,6 +245,17 @@ const restartBtn = document.getElementById("restart_btn");
 const quitBtn = document.getElementById("quit_btn");
 const quitGame = document.getElementById("quit_game");
 
+const stopGame = () => {
+  stopAudio();
+  clearInterval(cloudTimer);
+  clearInterval(obstacleTimer);
+  clearInterval(playerRunInterval);
+  
+  clearTimeout(startGeneratingObstacles);
+  clearTimeout(obstacleTimeout);
+  clearTimeout(cloudTimeOut);
+};
+
 const clearGame = () => {
   resetScore();
   clearObstacles();
@@ -264,6 +275,7 @@ const gameQuit = () => {
 };
 
 const showGamePause = () => {
+  clearGame();
   stopGame();
   gameOverContainer.classList.remove("hidden");
   message.innerText = "GAME PAUSE";
@@ -292,20 +304,13 @@ document.addEventListener("keydown", function (event) {
 
 quitGame.addEventListener("click", showGamePause);
 
-const stopGame = () => {
-  stopAudio();
-  clearInterval(cloudTimer);
-  clearInterval(obstacleTimer);
-  clearInterval(playerRunInterval);
-  clearTimeout(obstacleTimeout);
-  clearTimeout(cloudTimeOut);
-};
+let startGeneratingObstacles; 
 
 const game = () => {
   playAudio();
   playerRun();
   handleEnvironment();
-  setTimeout(startObstacles, 4000);
+  startGeneratingObstacles = setTimeout(startObstacles, 4000);
 };
 
 const handleGameOver = () => {
