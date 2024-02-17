@@ -296,6 +296,7 @@ const hiddenGameOver = () => {
   gameOverContainer.classList.add("hidden");
 };
 
+
 document.addEventListener("keydown", function (event) {
   if (event.key === "Escape" || event.key === "Esc") {
     showGamePause();
@@ -313,7 +314,11 @@ const game = () => {
   startGeneratingObstacles = setTimeout(startObstacles, 4000);
 };
 
+const howl = new Audio("./sounds/howleffect.mp3");
+
+
 const handleGameOver = () => {
+  howl.play();
   stopGame();
 
   gameOver = true;
