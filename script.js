@@ -31,13 +31,14 @@ function addInstructions() {
 }
 
 function openInstructions() {
-  addInstructions();
   gameInstructions.style.display = "block";
 }
 
 function closeInstructions() {
   gameInstructions.style.display = "none";
 }
+
+addInstructions();
 
 // AMBIENCE
 let backgroundMusic = new Audio("./sounds/music.mp3");
@@ -69,7 +70,6 @@ function createCloud() {
     const cloudDetail = getRandomCloud();
     const cloudStyle = cloudDetail.name;
     const cloudWidth = cloudDetail.width;
-    console.log(cloudWidth);
 
     newCloud.classList.add("cloud", cloudStyle);
     ambience.appendChild(newCloud);
@@ -97,7 +97,7 @@ let cloudTimeOut;
 function handleEnvironment() {
   if (!gameOver) {
     createCloud();
-    cloudTimeOut = setTimeout(handleEnvironment, Math.random() * 3000);
+    cloudTimeOut = setTimeout(handleEnvironment, Math.random() * 4000);
   }
 }
 
