@@ -1,5 +1,3 @@
-// CONSTANTS
-
 // Instructions section
 const buttonStart = document.getElementById("startGameButton");
 const gameInstructions = document.getElementById("gameInstructions");
@@ -40,6 +38,8 @@ function closeInstructions() {
   gameInstructions.style.display = "none";
 }
 
+addInstructions();
+
 // AMBIENCE
 let backgroundMusic = new Audio("./sounds/music.mp3");
 backgroundMusic.loop = true;
@@ -64,12 +64,11 @@ let cloudTimer;
 
 function createCloud() {
   if (!gameOver) {
-    const newCloud = document.createElement("div");
+    const newCloud = document.createElement("image");
 
     const cloudDetail = getRandomCloud();
     const cloudStyle = cloudDetail.name;
     const cloudWidth = cloudDetail.width;
-    console.log(cloudWidth);
 
     newCloud.classList.add("cloud", cloudStyle);
     ambience.appendChild(newCloud);
@@ -96,7 +95,7 @@ let cloudTimeOut;
 function handleEnvironment() {
   if (!gameOver) {
     createCloud();
-    cloudTimeOut = setTimeout(handleEnvironment, Math.random() * 3000);
+    cloudTimeOut = setTimeout(handleEnvironment, Math.random() * 4000);
   }
 }
 
@@ -341,5 +340,4 @@ buttonStart.addEventListener("click", function (e) {
   game();
 });
 
-addInstructions();
 openInstructions();

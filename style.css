@@ -113,9 +113,7 @@ h2 {
 
 .cloud {
   position: absolute;
-  background-image: url("./canvas/cloud.png");
-  background-size: contain;
-  background-repeat: no-repeat;
+  content: url("./canvas/cloud.png");
 }
 
 .big-cloud {
