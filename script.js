@@ -1,32 +1,23 @@
-// CONSTANTS
-
-// Instructions section
 const buttonStart = document.getElementById("startGameButton");
 const gameInstructions = document.getElementById("gameInstructions");
 const instruction = document.getElementById("instruction");
-const buttonPlayAgain = document.getElementById("playAgain");
-const buttonDontPlayAgain = document.getElementById("dontPlayAgain");
 const message = document.getElementById("message");
 const finalScore = document.getElementById("final-score");
-const finalMessage = document.getElementById("goodbyeMessage");
 const rules = [
-  "1. To win you have to avoid all the obstacles: stones, trees and rabbits",
-  "2. If you collide with any of the obstacles you will automatically lose and lose your score.",
-  "3. To jump press the 'up', 'enter' or 'space' key",
-  "4. Good luck and have fun with Jumping game",
+  "1. To win you have to avoid all the obstacles: stones, trees and flowers.",
+  "2. If you collide with any of the obstacles, you will automatically lose and lose your score.",
+  "3. To jump press the 'up', 'enter' or 'space' key.",
+  "4. Good luck and have fun with Jumping game!",
 ];
 
-// Game section
 const gameContainer = document.getElementById("gameContainer");
 const ambience = document.getElementById("ambience");
 const player = document.getElementById("player");
 
-//SCORE
 let score = 0;
 let scoreDisplay = document.getElementById("score");
 let gameOver = false;
 
-// INSTRUCTIONS MANAGEMENT
 function addInstructions() {
   for (let i = 0; i < 4; i++) {
     const instruction1 = document.createElement("p");
@@ -43,16 +34,18 @@ function closeInstructions() {
   gameInstructions.style.display = "none";
 }
 
-// AMBIENCE
+addInstructions();
+
 let backgroundMusic = new Audio("./sounds/music.mp3");
 backgroundMusic.loop = true;
 
 const playAudio = () => backgroundMusic.play();
+const stopAudio = () => backgroundMusic.pause();
 
 const clouds = [
-  { name: "big-cloud", width: 150 },
-  { name: "medium-cloud", width: 110 },
-  { name: "small-cloud", width: 70 },
+  { name: "big-cloud", width: 15 },
+  { name: "medium-cloud", width: 10 },
+  { name: "small-cloud", width: 7 },
 ];
 
 const getRandomCloud = () => {
@@ -60,13 +53,12 @@ const getRandomCloud = () => {
   return clouds[randomIndex];
 };
 
-// Function to create and move a new cloud
-
 let cloudTimer;
 
 function createCloud() {
   if (!gameOver) {
-    const newCloud = document.createElement("div");
+    const newCloud = document.createElement("image");
+
     const cloudDetail = getRandomCloud();
     const cloudStyle = cloudDetail.name;
     const cloudWidth = cloudDetail.width;
@@ -78,38 +70,34 @@ function createCloud() {
     newCloud.style.left = cloudPosition + "vw";
 
     cloudTimer = setInterval(() => {
-      if (cloudPosition < -cloudWidth) {
-        clearInterval(cloudTimer);
-        newCloud.remove();
-      }
-
       if (!gameOver) {
         cloudPosition -= 0.1;
         newCloud.style.left = cloudPosition + "vw";
+      }
+
+      if (cloudPosition < -cloudWidth) {
+        newCloud.remove();
       }
     }, 10);
   }
 }
 
-// Function to start generating clouds
 let cloudTimeOut;
 
 function handleEnvironment() {
   if (!gameOver) {
     createCloud();
-    cloudTimeOut = setTimeout(handleEnvironment, Math.random() * 3000);
+    cloudTimeOut = setTimeout(handleEnvironment, Math.random() * 4000);
   }
 }
 
 const clearClouds = () => {
-  const cloudElements = document.querySelectorAll('.cloud');
+  const cloudElements = document.querySelectorAll(".cloud");
 
   cloudElements.forEach(function (cloudElement) {
     cloudElement.remove();
   });
-}
-
-// SCORE
+};
 
 const debounce = (func, wait, immediate) => {
   let timeout;
@@ -139,9 +127,8 @@ const scorePlus = debounce(increaseScore, 1000, true);
 const resetScore = () => {
   score = 0;
   scoreDisplay.innerText = score.toString().padStart(3, "0");
-}
+};
 
-// OBSTACLES AND GAME LOGIC
 const obstacles = ["rock", "tree", "flower"];
 
 let obstacleTimer;
@@ -151,10 +138,10 @@ const getRandomObstacle = () => {
   return obstacles[randomIndex];
 };
 
-let obstacle = document.createElement("img");
 const createObstacle = () => {
+  let obstacle = document.createElement("img");
+
   if (!gameOver) {
-    // obstacle = document.createElement("img");
     let obstacleDetail = getRandomObstacle();
     obstacle.classList.add("obstacle", obstacleDetail);
     gameContainer.appendChild(obstacle);
@@ -198,14 +185,13 @@ const startObstacles = () => {
 };
 
 const clearObstacles = () => {
-  const obstacleElements = document.querySelectorAll('.obstacle');
+  const obstacleElements = document.querySelectorAll(".obstacle");
 
   obstacleElements.forEach(function (obstacleElement) {
     obstacleElement.remove();
   });
-}
+};
 
-// PLAYER
 let playerRunInterval;
 
 const playerRun = () => {
@@ -224,8 +210,6 @@ const playerRun = () => {
     }
   }, 50);
 };
-
-// Player jump
 
 const barkEffect = new Audio("./sounds/dog-bark.wav");
 
@@ -256,11 +240,21 @@ const jumpKey = (event) => {
 
 document.addEventListener("keydown", jumpKey);
 
-// Game Over display && restart function
 const gameOverContainer = document.querySelector(".game-over-container");
 const restartBtn = document.getElementById("restart_btn");
 const quitBtn = document.getElementById("quit_btn");
 const quitGame = document.getElementById("quit_game");
+
+const stopGame = () => {
+  stopAudio();
+  clearInterval(cloudTimer);
+  clearInterval(obstacleTimer);
+  clearInterval(playerRunInterval);
+  
+  clearTimeout(startGeneratingObstacles);
+  clearTimeout(obstacleTimeout);
+  clearTimeout(cloudTimeOut);
+};
 
 const clearGame = () => {
   resetScore();
@@ -268,7 +262,7 @@ const clearGame = () => {
   clearClouds();
   hiddenGameOver();
   gameOver = false;
-}
+};
 
 const gameRestart = () => {
   clearGame();
@@ -281,12 +275,13 @@ const gameQuit = () => {
 };
 
 const showGamePause = () => {
+  clearGame();
   stopGame();
   gameOverContainer.classList.remove("hidden");
   message.innerText = "GAME PAUSE";
   quitBtn.addEventListener("click", gameQuit);
   restartBtn.addEventListener("click", gameRestart);
-}
+};
 
 const showGameOver = () => {
   gameOverContainer.classList.remove("hidden");
@@ -299,9 +294,10 @@ const showGameOver = () => {
 
 const hiddenGameOver = () => {
   gameOverContainer.classList.add("hidden");
-}
+};
 
-document.addEventListener('keydown', function (event) {
+
+document.addEventListener("keydown", function (event) {
   if (event.key === "Escape" || event.key === "Esc") {
     showGamePause();
   }
@@ -309,23 +305,13 @@ document.addEventListener('keydown', function (event) {
 
 quitGame.addEventListener("click", showGamePause);
 
-// GAME
-const stopGame = () => {
-  // Clear timers
-  clearInterval(cloudTimer);
-  clearInterval(obstacleTimer);
-  clearInterval(playerRunInterval);
-
-  // Clear existing timeouts
-  clearTimeout(obstacleTimeout);
-  clearTimeout(cloudTimeOut);
-}
+let startGeneratingObstacles; 
 
 const game = () => {
   playAudio();
   playerRun();
   handleEnvironment();
-  setTimeout(startObstacles, 4000);
+  startGeneratingObstacles = setTimeout(startObstacles, 4000);
 };
 
 const howl = new Audio("./sounds/howleffect.mp3");
@@ -344,5 +330,4 @@ buttonStart.addEventListener("click", function (e) {
   game();
 });
 
-addInstructions();
 openInstructions();
