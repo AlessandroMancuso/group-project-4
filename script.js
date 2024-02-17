@@ -65,7 +65,7 @@ const getRandomCloud = () => {
 let cloudTimer;
 
 function createCloud() {
-  if(!gameOver){
+  if (!gameOver) {
     const newCloud = document.createElement("div");
     const cloudDetail = getRandomCloud();
     const cloudStyle = cloudDetail.name;
@@ -104,7 +104,7 @@ function handleEnvironment() {
 const clearClouds = () => {
   const cloudElements = document.querySelectorAll('.cloud');
 
-  cloudElements.forEach(function(cloudElement) {
+  cloudElements.forEach(function (cloudElement) {
     cloudElement.remove();
   });
 }
@@ -200,7 +200,7 @@ const startObstacles = () => {
 const clearObstacles = () => {
   const obstacleElements = document.querySelectorAll('.obstacle');
 
-  obstacleElements.forEach(function(obstacleElement) {
+  obstacleElements.forEach(function (obstacleElement) {
     obstacleElement.remove();
   });
 }
@@ -301,7 +301,7 @@ const hiddenGameOver = () => {
   gameOverContainer.classList.add("hidden");
 }
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
   if (event.key === "Escape" || event.key === "Esc") {
     showGamePause();
   }
@@ -328,7 +328,11 @@ const game = () => {
   setTimeout(startObstacles, 4000);
 };
 
+const howl = new Audio("./sounds/howleffect.mp3");
+
+
 const handleGameOver = () => {
+  howl.play();
   stopGame();
 
   gameOver = true;
