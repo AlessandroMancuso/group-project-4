@@ -4,10 +4,10 @@ const instruction = document.getElementById("instruction");
 const message = document.getElementById("message");
 const finalScore = document.getElementById("final-score");
 const rules = [
-  "1. To win you have to avoid all the obstacles: stones, trees and flowers",
-  "2. If you collide with any of the obstacles you will automatically lose and lose your score.",
-  "3. To jump press the 'up', 'enter' or 'space' key",
-  "4. Good luck and have fun with Jumping game",
+  "1. To win you have to avoid all the obstacles: stones, trees and flowers.",
+  "2. If you collide with any of the obstacles, you will automatically lose and lose your score.",
+  "3. To jump press the 'up', 'enter' or 'space' key.",
+  "4. Good luck and have fun with Jumping game!",
 ];
 
 const gameContainer = document.getElementById("gameContainer");
