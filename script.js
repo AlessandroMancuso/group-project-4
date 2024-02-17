@@ -64,7 +64,7 @@ let cloudTimer;
 function createCloud() {
 
   if(!gameOver){
-    const newCloud = document.createElement("div");
+    const newCloud = document.createElement("image");
 
     const cloudDetail = getRandomCloud();
     const cloudStyle = cloudDetail.name;
