@@ -283,16 +283,22 @@ const showGamePause = () => {
   stopGame();
   gameOverContainer.classList.remove("hidden");
   message.innerText = "GAME PAUSE";
-  quitBtn.addEventListener("click", gameQuit);
   finalScore.classList.add("hidden");
-  restartBtn.classList.add("hidden");
-  cancelBtn.classList.remove("hidden");
+  restartBtn.classList.toggle("hidden");
+  cancelBtn.classList.toggle("hidden");
+  quitBtn.addEventListener("click", gameQuit);
+  if (quitBtn.onclick) {
+    gameOver = true;
+  }
   //restartBtn.addEventListener("click", gameRestart);
   cancelBtn.addEventListener("click", () => {
     gameOverContainer.classList.add("hidden");
     game();
     return;
   });
+  if (cancelBtn.onclick()) {
+    gameOver = false;
+  }
 };
 
 const showGameOver = () => {
