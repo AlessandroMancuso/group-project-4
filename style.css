@@ -62,7 +62,7 @@ h2 {
   background-color: aqua;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 
 .run1 {
@@ -184,7 +184,7 @@ h2 {
   font-family: "Orbitron", sans-serif;
 }
 
-.message-buttons{
+.message-buttons {
   display: flex;
   gap: 1em;
 }
@@ -198,11 +198,16 @@ h2 {
   display: none;
 }
 
-@media(max-width: 850px) {
+#quit_game {
+  font-size: 0.8em;
+  color: white;
+  position: relative;
+  text-align: center;
+}
+
+@media (max-width: 850px) {
   #gameInstructions {
     width: 80vw;
     height: 80vh;
   }
-
 }
-
