@@ -67,6 +67,17 @@ h2 {
   align-items: center;
 }
 
+#startGameButton {
+  cursor: pointer;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 0.3em;
+}
+
+#startGameButton:hover {
+  background-color: #ccc;
+}
+
 .run1 {
   content: url("./canvas/dog1.png");
 }
