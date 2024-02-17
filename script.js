@@ -4,11 +4,11 @@
 const buttonStart = document.getElementById("startGameButton");
 const gameInstructions = document.getElementById("gameInstructions");
 const instruction = document.getElementById("instruction");
-const buttonPlayAgain = document.getElementById("playAgain");
-const buttonDontPlayAgain = document.getElementById("dontPlayAgain");
+// const buttonPlayAgain = document.getElementById("playAgain");
+// const buttonDontPlayAgain = document.getElementById("dontPlayAgain");
 const message = document.getElementById("message");
 const finalScore = document.getElementById("final-score");
-const finalMessage = document.getElementById("goodbyeMessage");
+// const finalMessage = document.getElementById("goodbyeMessage");
 const rules = [
   "1. To win you have to avoid all the obstacles: stones, trees and rabbits",
   "2. If you collide with any of the obstacles you will automatically lose and lose your score.",
@@ -48,6 +48,7 @@ let backgroundMusic = new Audio("./sounds/music.mp3");
 backgroundMusic.loop = true;
 
 const playAudio = () => backgroundMusic.play();
+const stopAudio = () => backgroundMusic.pause();
 
 const clouds = [
   { name: "big-cloud", width: 150 },
@@ -148,6 +149,8 @@ let obstacleTimer;
 
 const getRandomObstacle = () => {
   const randomIndex = Math.floor(Math.random() * obstacles.length);
+  console.log(randomIndex);
+  console.log(obstacles[randomIndex])
   return obstacles[randomIndex];
 };
 
@@ -156,6 +159,7 @@ const createObstacle = () => {
   if (!gameOver) {
     // obstacle = document.createElement("img");
     let obstacleDetail = getRandomObstacle();
+    console.log(obstacleDetail);
     obstacle.classList.add("obstacle", obstacleDetail);
     gameContainer.appendChild(obstacle);
 
@@ -311,6 +315,8 @@ quitGame.addEventListener("click", showGamePause);
 
 // GAME
 const stopGame = () => {
+
+  stopAudio();
   // Clear timers
   clearInterval(cloudTimer);
   clearInterval(obstacleTimer);
