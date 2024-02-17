@@ -1,5 +1,3 @@
-// CONSTANTS
-
 // Instructions section
 const buttonStart = document.getElementById("startGameButton");
 const gameInstructions = document.getElementById("gameInstructions");
@@ -33,6 +31,7 @@ function addInstructions() {
 }
 
 function openInstructions() {
+  addInstructions();
   gameInstructions.style.display = "block";
 }
 
@@ -344,5 +343,4 @@ buttonStart.addEventListener("click", function (e) {
   game();
 });
 
-addInstructions();
 openInstructions();
