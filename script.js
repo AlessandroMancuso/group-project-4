@@ -63,7 +63,7 @@ const getRandomCloud = () => {
 let cloudTimer;
 
 function createCloud() {
-  if(!gameOver){
+  if (!gameOver) {
     const newCloud = document.createElement("div");
     const cloudDetail = getRandomCloud();
     const cloudStyle = cloudDetail.name;
@@ -100,12 +100,12 @@ function handleEnvironment() {
 }
 
 const clearClouds = () => {
-  const cloudElements = document.querySelectorAll('.cloud');
+  const cloudElements = document.querySelectorAll(".cloud");
 
-  cloudElements.forEach(function(cloudElement) {
+  cloudElements.forEach(function (cloudElement) {
     cloudElement.remove();
   });
-}
+};
 
 // SCORE
 
@@ -137,7 +137,7 @@ const scorePlus = debounce(increaseScore, 1000, true);
 const resetScore = () => {
   score = 0;
   scoreDisplay.innerText = score.toString().padStart(3, "0");
-}
+};
 
 // OBSTACLES AND GAME LOGIC
 const obstacles = ["rock", "tree", "flower"];
@@ -196,12 +196,12 @@ const startObstacles = () => {
 };
 
 const clearObstacles = () => {
-  const obstacleElements = document.querySelectorAll('.obstacle');
+  const obstacleElements = document.querySelectorAll(".obstacle");
 
-  obstacleElements.forEach(function(obstacleElement) {
+  obstacleElements.forEach(function (obstacleElement) {
     obstacleElement.remove();
   });
-}
+};
 
 // PLAYER
 let playerRunInterval;
@@ -258,6 +258,7 @@ document.addEventListener("keydown", jumpKey);
 const gameOverContainer = document.querySelector(".game-over-container");
 const restartBtn = document.getElementById("restart_btn");
 const quitBtn = document.getElementById("quit_btn");
+const cancelBtn = document.getElementById("cancel_btn");
 const quitGame = document.getElementById("quit_game");
 
 const clearGame = () => {
@@ -266,7 +267,7 @@ const clearGame = () => {
   clearClouds();
   hiddenGameOver();
   gameOver = false;
-}
+};
 
 const gameRestart = () => {
   clearGame();
@@ -283,8 +284,15 @@ const showGamePause = () => {
   gameOverContainer.classList.remove("hidden");
   message.innerText = "GAME PAUSE";
   quitBtn.addEventListener("click", gameQuit);
-  restartBtn.addEventListener("click", gameRestart);
-}
+  restartBtn.classList.add("hidden");
+  cancelBtn.classList.remove("hidden");
+  //restartBtn.addEventListener("click", gameRestart);
+  cancelBtn.addEventListener("click", () => {
+    gameOverContainer.classList.add("hidden");
+    game();
+    return;
+  });
+};
 
 const showGameOver = () => {
   gameOverContainer.classList.remove("hidden");
@@ -297,9 +305,9 @@ const showGameOver = () => {
 
 const hiddenGameOver = () => {
   gameOverContainer.classList.add("hidden");
-}
+};
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener("keydown", function (event) {
   if (event.key === "Escape" || event.key === "Esc") {
     showGamePause();
   }
@@ -309,17 +317,15 @@ quitGame.addEventListener("click", showGamePause);
 
 // GAME
 const stopGame = () => {
-
   stopAudio();
   // Clear timers
   clearInterval(cloudTimer);
   clearInterval(obstacleTimer);
   clearInterval(playerRunInterval);
-
   // Clear existing timeouts
   clearTimeout(obstacleTimeout);
   clearTimeout(cloudTimeOut);
-}
+};
 
 const game = () => {
   playAudio();
@@ -330,7 +336,6 @@ const game = () => {
 
 const handleGameOver = () => {
   stopGame();
-
   gameOver = true;
   showGameOver();
 };
