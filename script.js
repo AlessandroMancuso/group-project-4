@@ -4,13 +4,10 @@
 const buttonStart = document.getElementById("startGameButton");
 const gameInstructions = document.getElementById("gameInstructions");
 const instruction = document.getElementById("instruction");
-const buttonPlayAgain = document.getElementById("playAgain");
-const buttonDontPlayAgain = document.getElementById("dontPlayAgain");
 const message = document.getElementById("message");
 const finalScore = document.getElementById("final-score");
-const finalMessage = document.getElementById("goodbyeMessage");
 const rules = [
-  "1. To win you have to avoid all the obstacles: stones, trees and rabbits",
+  "1. To win you have to avoid all the obstacles: stones, trees and flowers",
   "2. If you collide with any of the obstacles you will automatically lose and lose your score.",
   "3. To jump press the 'up', 'enter' or 'space' key",
   "4. Good luck and have fun with Jumping game",
@@ -48,6 +45,7 @@ let backgroundMusic = new Audio("./sounds/music.mp3");
 backgroundMusic.loop = true;
 
 const playAudio = () => backgroundMusic.play();
+const stopAudio = () => backgroundMusic.pause();
 
 const clouds = [
   { name: "big-cloud", width: 150 },
@@ -311,6 +309,8 @@ quitGame.addEventListener("click", showGamePause);
 
 // GAME
 const stopGame = () => {
+
+  stopAudio();
   // Clear timers
   clearInterval(cloudTimer);
   clearInterval(obstacleTimer);
