@@ -149,8 +149,9 @@ const getRandomObstacle = () => {
   return obstacles[randomIndex];
 };
 
-let obstacle = document.createElement("img");
 const createObstacle = () => {
+  let obstacle = document.createElement("img");
+
   if (!gameOver) {
     // obstacle = document.createElement("img");
     let obstacleDetail = getRandomObstacle();
